@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import prog.exceptions.NoVideoFoundException;
 import prog.video.Video;
 import prog.video.VideoFichier;
 import prog.video.VideoYtb;
@@ -45,9 +46,8 @@ public class TacheCharger extends Tache<List<Video>>{
 				} else {
 					listeVideos.add(new VideoYtb(url));
 				}
-			} catch(NullPointerException e) {
-				// à gérer
-				e.printStackTrace();
+			} catch(NoVideoFoundException e) {
+
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
