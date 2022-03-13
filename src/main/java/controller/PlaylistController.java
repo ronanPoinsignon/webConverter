@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import modele.Counter;
 import modele.downloader.Downloader;
 import modele.tache.TacheChargerPlaylist;
 import modele.tache.TacheConvertirToFile;
 import modele.video.Video;
+import service.CounterService;
 import utils.Utils;
 
 @Controller
@@ -34,6 +34,11 @@ import utils.Utils;
 public class PlaylistController {
 
 	protected Downloader downloader = new Downloader();
+	private CounterService counterService;
+
+	public PlaylistController(CounterService counterService) {
+		this.counterService = counterService;
+	}
 
 	@GetMapping(value = "", produces = "application/zip")
 	public void convert(HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "id") String id) throws IOException {
@@ -42,8 +47,7 @@ public class PlaylistController {
 		List<File> files = new ArrayList<>();
 		List<String> listeExtensions = new ArrayList<>();
 		listeExtensions.add("mp3");
-		Counter counter = Counter.getInstance();
-		int number = counter.getNextNumber();
+		int number = counterService.getNextNumber();
 		File folder = Utils.getWebFolder(String.valueOf(number));
 		TacheConvertirToFile convert = new TacheConvertirToFile(videos, folder, 0, listeExtensions);
 		files.addAll(convert.download());
@@ -58,7 +62,7 @@ public class PlaylistController {
 			.map(Path::toFile)
 			.forEach(File::delete);
 		}
-		counter.removeNumber(number);
+		counterService.removeNumber(number);
 	}
 
 	private byte[] zipFiles(List<File> files) throws IOException {

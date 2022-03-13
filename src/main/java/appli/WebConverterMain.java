@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"controller", "configuration"} )
+@ComponentScan(basePackages = {"controller", "configuration", "service"} )
 public class WebConverterMain {
 
 	public static void main(String[] args) {

@@ -1,25 +1,16 @@
-package modele;
+package service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Counter {
+import org.springframework.stereotype.Service;
 
-	private static Counter counter = null;
+@Service
+public class CounterService {
+
 
 	private List<Integer> usedNumbers = new ArrayList<>();
 	private List<Integer> notUsedNumbers = new ArrayList<>();
-
-	private Counter() {
-
-	}
-
-	public static Counter getInstance() {
-		if(Counter.counter == null) {
-			Counter.counter = new Counter();
-		}
-		return Counter.counter;
-	}
 
 	public int getActualNumber() {
 		return usedNumbers.stream().mapToInt(number -> number).max().orElse(0);

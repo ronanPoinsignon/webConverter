@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import exception.NoVideoFoundException;
-import modele.Counter;
 import modele.downloader.Downloader;
 import modele.tache.TacheConvertirInstant;
+import service.CounterService;
 import utils.Utils;
 
 @Controller
@@ -31,13 +31,17 @@ import utils.Utils;
 public class VideoController {
 
 	protected Downloader downloader = new Downloader();
+	private CounterService counterService;
+
+	public VideoController(CounterService counterService) {
+		this.counterService = counterService;
+	}
 
 	@GetMapping(value = "")
 	public void convert(HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "id") String id) throws Exception {
 		List<String> listeExtensions = new ArrayList<>();
 		listeExtensions.add("mp3");
-		Counter counter = Counter.getInstance();
-		int number = counter.getNextNumber();
+		int number = counterService.getNextNumber();
 		File folder = Utils.getWebFolder(String.valueOf(number));
 		TacheConvertirInstant tache = new TacheConvertirInstant(id, folder, Utils.BIT_RATE, listeExtensions);
 		File file = tache.download();
@@ -47,7 +51,7 @@ public class VideoController {
 			.sorted(Comparator.reverseOrder())
 			.map(Path::toFile)
 			.forEach(File::delete);
-			counter.removeNumber(number);
+			counterService.removeNumber(number);
 			throw new NoVideoFoundException();
 		}
 
@@ -69,6 +73,6 @@ public class VideoController {
 		.sorted(Comparator.reverseOrder())
 		.map(Path::toFile)
 		.forEach(File::delete);
-		counter.removeNumber(number);
+		counterService.removeNumber(number);
 	}
 }
