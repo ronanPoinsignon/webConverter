@@ -79,7 +79,6 @@ public class TacheConvertirToFile extends Tache<List<File>> {
 					}
 				}
 				catch(NoVideoFoundException e) {
-					e.printStackTrace();
 					listeVideoSansTelechargement.add(video);
 				}
 				catch(Exception e) {

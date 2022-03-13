@@ -40,8 +40,6 @@ public class Counter {
 	public void removeNumber(int number) {
 		usedNumbers.remove(new Integer(number));
 		notUsedNumbers.add(number);
-		System.out.println("used : " + usedNumbers.size() + " / " + usedNumbers);
-		System.out.println("not used : " + notUsedNumbers.size() + " / " + notUsedNumbers);
 	}
 
 }
