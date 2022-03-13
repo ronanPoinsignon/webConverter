@@ -1,6 +1,6 @@
 package controller;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +33,7 @@ public class ControllerExceptionHandler {
 	private class ErrorResponse {
 
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-		private Date timestamp;
+		private LocalDateTime timestamp;
 
 		private int code;
 
@@ -42,7 +42,7 @@ public class ControllerExceptionHandler {
 		private String message;
 
 		public ErrorResponse() {
-			timestamp = new Date();
+			timestamp = LocalDateTime.now();
 		}
 
 		public ErrorResponse(
@@ -57,7 +57,7 @@ public class ControllerExceptionHandler {
 		}
 
 		@SuppressWarnings("unused")
-		public Date getTimestamp() {
+		public LocalDateTime getTimestamp() {
 			return timestamp;
 		}
 
