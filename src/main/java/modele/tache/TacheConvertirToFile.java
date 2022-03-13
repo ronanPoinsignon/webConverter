@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import prog.Utils;
-import prog.convertisseur.Convertisseur;
-import prog.convertisseur.ConvertisseurMusique;
-import prog.convertisseur.ConvertisseurVideo;
-import prog.exceptions.NoVideoFoundException;
-import prog.video.Video;
+import exception.NoVideoFoundException;
+import modele.convertisseur.Convertisseur;
+import modele.convertisseur.ConvertisseurMusique;
+import modele.convertisseur.ConvertisseurVideo;
+import modele.video.Video;
+import utils.Utils;
 import ws.schild.jave.EncoderException;
 
 /**

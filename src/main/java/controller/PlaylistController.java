@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import modele.Counter;
+import modele.downloader.Downloader;
 import modele.tache.TacheChargerPlaylist;
 import modele.tache.TacheConvertirToFile;
-import prog.Downloader;
-import prog.Utils;
-import prog.video.Video;
+import modele.video.Video;
+import utils.Utils;
 
 @Controller
 @RequestMapping("/playlist")

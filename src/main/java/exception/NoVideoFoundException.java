@@ -1,8 +1,6 @@
-package prog.exceptions;
+package exception;
 
 import org.springframework.http.HttpStatus;
-
-import exception.BaseException;
 
 public class NoVideoFoundException extends BaseException {
 

@@ -1,4 +1,4 @@
-package prog.video;
+package modele.video;
 
 import java.io.Serializable;
 import java.util.Objects;

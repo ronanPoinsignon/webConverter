@@ -1,4 +1,4 @@
-package prog.video;
+package modele.video;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,9 +9,9 @@ import com.github.kiulian.downloader.downloader.request.RequestVideoInfo;
 import com.github.kiulian.downloader.downloader.response.Response;
 import com.github.kiulian.downloader.model.videos.VideoInfo;
 
-import prog.Downloader;
-import prog.Utils;
-import prog.exceptions.NoVideoFoundException;
+import exception.NoVideoFoundException;
+import modele.downloader.Downloader;
+import utils.Utils;
 
 public class VideoYtb extends Video {
 

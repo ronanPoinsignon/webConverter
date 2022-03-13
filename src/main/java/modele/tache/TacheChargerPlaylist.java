@@ -10,8 +10,8 @@ import com.github.kiulian.downloader.downloader.response.Response;
 import com.github.kiulian.downloader.model.playlist.PlaylistInfo;
 import com.github.kiulian.downloader.model.playlist.PlaylistVideoDetails;
 
-import prog.video.Video;
-import prog.video.VideoYtb;
+import modele.video.Video;
+import modele.video.VideoYtb;
 
 public class TacheChargerPlaylist extends Tache<List<Video>> {
 

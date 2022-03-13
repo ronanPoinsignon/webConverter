@@ -4,10 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import prog.exceptions.NoVideoFoundException;
-import prog.video.Video;
-import prog.video.VideoFichier;
-import prog.video.VideoYtb;
+import exception.NoVideoFoundException;
+import modele.video.Video;
+import modele.video.VideoFichier;
+import modele.video.VideoYtb;
 
 /**
  * Classe permettant de charger une ou plusieurs vidéos dans la liste de vidéo.

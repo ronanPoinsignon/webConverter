@@ -1,4 +1,4 @@
-package prog.traduction;
+package modele.traduction;
 
 public class TraductionFr implements ITraduction {
 

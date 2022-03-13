@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import exception.NoVideoFoundException;
 import modele.Counter;
+import modele.downloader.Downloader;
 import modele.tache.TacheConvertirInstant;
-import prog.Downloader;
-import prog.Utils;
-import prog.exceptions.NoVideoFoundException;
+import utils.Utils;
 
 @Controller
 @RequestMapping("/video")

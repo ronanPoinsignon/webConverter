@@ -1,4 +1,4 @@
-package prog.log;
+package modele.log;
 
 /**
  * Classe de log permettant l'affichage d'erreur ou de mauvaise manipulations.

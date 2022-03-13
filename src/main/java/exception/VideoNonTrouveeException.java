@@ -1,4 +1,4 @@
-package prog.exceptions;
+package exception;
 
 /**
  *

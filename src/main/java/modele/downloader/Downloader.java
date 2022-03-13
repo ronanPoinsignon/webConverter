@@ -1,4 +1,4 @@
-package prog;
+package modele.downloader;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +18,8 @@ import com.github.kiulian.downloader.model.videos.formats.VideoFormat;
 import com.github.kiulian.downloader.model.videos.formats.VideoWithAudioFormat;
 import com.github.kiulian.downloader.model.videos.quality.VideoQuality;
 
-import prog.exceptions.NoVideoFoundException;
+import exception.NoVideoFoundException;
+import utils.Utils;
 
 /**
  * Classe permettant le téléchargement de vidéos Youtube.
