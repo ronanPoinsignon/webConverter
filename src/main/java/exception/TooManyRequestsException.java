@@ -1,6 +1,8 @@
 package exception;
 
-public class TooManyRequestsException extends Exception {
+import org.springframework.http.HttpStatus;
+
+public class TooManyRequestsException extends BaseException {
 
 	/**
 	 *
@@ -9,5 +11,10 @@ public class TooManyRequestsException extends Exception {
 
 	public TooManyRequestsException() {
 		super("Le nombre de requêtes en cours est actuellement trop important.");
+	}
+
+	@Override
+	public HttpStatus getHttpStatus() {
+		return HttpStatus.TOO_MANY_REQUESTS;
 	}
 }
