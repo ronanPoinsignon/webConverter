@@ -28,7 +28,12 @@ public class TacheConvertirInstant extends Tache<File> {
 		final TacheCharger tache = new TacheCharger(url);
 		final TacheConvertirToFile tacheConv = new TacheConvertirToFile(tache.download(), folder, bitRate, listeExtensions);
 
-		return tacheConv.download().get(0);
+		List<File> files = tacheConv.download();
+		if(files.isEmpty()) {
+			return null;
+		} else {
+			return files.get(0);
+		}
 	}
 
 }
