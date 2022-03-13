@@ -7,14 +7,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import exception.TooManyRequestsException;
-import prog.exceptions.NoVideoFoundException;
+import exception.BaseException;
 
+@EnableWebMvc
 @ControllerAdvice
 public class ControllerExceptionHandler {
+
+	@ExceptionHandler(value = {BaseException.class})
+	public ResponseEntity<ErrorResponse> internalServerError(BaseException ex) {
+		return buildError(ex);
+	}
 
 	@ExceptionHandler(value = {Exception.class})
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -22,13 +28,8 @@ public class ControllerExceptionHandler {
 		return "Internal error";
 	}
 
-	@ExceptionHandler(value = {TooManyRequestsException.class})
-	public ResponseEntity<ErrorResponse> internalServerError(TooManyRequestsException ex) {
-		return buildError(ex, HttpStatus.TOO_MANY_REQUESTS);
-	}
-
-	private ResponseEntity<ErrorResponse> buildError(Exception ex, HttpStatus status){
-		return new ResponseEntity<>(new ErrorResponse(status, ex.getMessage()), status);
+	private ResponseEntity<ErrorResponse> buildError(BaseException ex){
+		return new ResponseEntity<>(new ErrorResponse(ex.getHttpStatus(), ex.getMessage()), ex.getHttpStatus());
 	}
 
 	private class ErrorResponse {
