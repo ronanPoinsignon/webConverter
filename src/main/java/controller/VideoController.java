@@ -24,6 +24,7 @@ import modele.Counter;
 import modele.tache.TacheConvertirInstant;
 import prog.Downloader;
 import prog.Utils;
+import prog.exceptions.NoVideoFoundException;
 
 @Controller
 @RequestMapping("/video")
@@ -40,6 +41,15 @@ public class VideoController {
 		File folder = Utils.getWebFolder(String.valueOf(number));
 		TacheConvertirInstant tache = new TacheConvertirInstant(id, folder, Utils.BIT_RATE, listeExtensions);
 		File file = tache.download();
+
+		if(file == null) {
+			Files.walk(folder.toPath())
+			.sorted(Comparator.reverseOrder())
+			.map(Path::toFile)
+			.forEach(File::delete);
+			counter.removeNumber(number);
+			throw new NoVideoFoundException();
+		}
 
 		//get the mimetype
 		String mimeType = URLConnection.guessContentTypeFromName(file.getName());
