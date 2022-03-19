@@ -5,10 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -57,10 +54,7 @@ public class PlaylistController {
 		response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + name + "\"");
 		response.getOutputStream().write(zipFiles(files));
 		if(!files.isEmpty()) {
-			Files.walk(folder.toPath())
-			.sorted(Comparator.reverseOrder())
-			.map(Path::toFile)
-			.forEach(File::delete);
+			Utils.delete(folder);
 		}
 		counterService.removeNumber(number);
 	}

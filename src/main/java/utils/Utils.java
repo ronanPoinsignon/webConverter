@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * Classe Fourre-tout.
@@ -94,6 +95,12 @@ public class Utils {
 		.map(Path::toFile)
 		.forEach(File::delete);
 		folder.delete();
+	}
+
+	public static void delete(File folder) throws IOException {
+		try(Stream<Path> stream = Files.walk(folder.toPath())){
+			stream.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
+		}
 	}
 
 }

@@ -5,10 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URLConnection;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,32 +44,22 @@ public class VideoController {
 		File file = tache.download();
 
 		if(file == null) {
-			Files.walk(folder.toPath())
-			.sorted(Comparator.reverseOrder())
-			.map(Path::toFile)
-			.forEach(File::delete);
-			counterService.removeNumber(number);
+			Utils.delete(folder);
 			throw new NoVideoFoundException();
 		}
 
-		//get the mimetype
 		String mimeType = URLConnection.guessContentTypeFromName(file.getName());
 		if (mimeType == null) {
-			//unknown mimetype so set the mimetype to application/octet-stream
 			mimeType = "application/octet-stream";
 		}
 		response.setContentType(mimeType);
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
-		//Here we have mentioned it to show as attachment
-		//response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + file.getName() + "\""));
 		response.setContentLength((int) file.length());
-		InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-		FileCopyUtils.copy(inputStream, response.getOutputStream());
+		try(InputStream inputStream = new BufferedInputStream(new FileInputStream(file))){
+			FileCopyUtils.copy(inputStream, response.getOutputStream());
 
-		Files.walk(folder.toPath())
-		.sorted(Comparator.reverseOrder())
-		.map(Path::toFile)
-		.forEach(File::delete);
+		}
+		Utils.delete(folder);
 		counterService.removeNumber(number);
 	}
 }
