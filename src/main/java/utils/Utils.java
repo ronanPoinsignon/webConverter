@@ -99,7 +99,7 @@ public class Utils {
 
 	public static void delete(File folder) throws IOException {
 		try(Stream<Path> stream = Files.walk(folder.toPath())){
-			stream.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
+			stream.map(Path::toFile).forEach(File::delete);
 		}
 	}
 
