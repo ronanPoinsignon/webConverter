@@ -44,7 +44,7 @@ public class VideoController {
 		File file = tache.download();
 
 		if(file == null) {
-			Utils.delete(folder);
+			Utils.deleteFolder(folder);
 			throw new NoVideoFoundException();
 		}
 
@@ -59,7 +59,7 @@ public class VideoController {
 			FileCopyUtils.copy(inputStream, response.getOutputStream());
 
 		}
-		Utils.delete(folder);
+		Utils.deleteFolder(folder);
 		counterService.removeNumber(number);
 	}
 }

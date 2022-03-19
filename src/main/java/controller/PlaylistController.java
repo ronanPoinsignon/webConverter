@@ -54,7 +54,7 @@ public class PlaylistController {
 		response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + name + "\"");
 		response.getOutputStream().write(zipFiles(files));
 		if(!files.isEmpty()) {
-			Utils.delete(folder);
+			Utils.deleteFolder(folder);
 		}
 		counterService.removeNumber(number);
 	}

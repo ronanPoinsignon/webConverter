@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -89,15 +88,7 @@ public class Utils {
 		return newTitle.toString();
 	}
 
-	public static void deleteFile(File folder) throws IOException {
-		Files.walk(folder.toPath())
-		.sorted(Comparator.reverseOrder())
-		.map(Path::toFile)
-		.forEach(File::delete);
-		folder.delete();
-	}
-
-	public static void delete(File folder) throws IOException {
+	public static void deleteFolder(File folder) throws IOException {
 		try(Stream<Path> stream = Files.walk(folder.toPath())){
 			stream.map(Path::toFile).forEach(File::delete);
 		}
