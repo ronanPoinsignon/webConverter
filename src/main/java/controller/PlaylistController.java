@@ -77,8 +77,6 @@ public class PlaylistController {
 					zos.closeEntry();
 				}
 			}
-
-			zos.close();
 			return baos.toByteArray();
 		}
 	}
